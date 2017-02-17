@@ -13,9 +13,23 @@
 			height : 60px;
 			background-color: #C2185B;
 		}
-		#score{
+		#pomme{
 			font-family: fantasy;
 			text-align: center;
+			font-weight: 100;
+			font-size: 2em;
+			color: red;
+		}
+		#temps{
+			font-family: fantasy;
+			text-align: left;
+			font-weight: 100;
+			font-size: 2em;
+			color: blue;
+		}
+		#score{
+			font-family: fantasy;
+			text-align: right;
 			font-weight: 100;
 			font-size: 2em;
 			color: red;
@@ -24,7 +38,9 @@
 </head>
 <body>
 <div id="afficheur">
-	<p id="score">0</p>
+	<span id="pomme">0</span>
+	<span id="temps">0</span>
+	<span id="score">0</span>
 </div >
 <canvas  id="myCanvas" width="1000" height="500" onkeydown="directionnalFunction(event)"></canvas>
 </body>

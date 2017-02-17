@@ -3,9 +3,9 @@ window.onload= function()
 	window.addEventListener("keydown", checkKeyPressed, false);
  
 	function checkKeyPressed(e) {
-		var x = e.keyCode;
+var x = e.keyCode;
 	    if (x == 37) {  // left arrow
-	    	if(serpent.speedx==1){
+	    	if(serpent.speedx==1 && total>0){
 	    		serpent.speedy=0;
 	    	}
 	    	else{
@@ -15,7 +15,7 @@ window.onload= function()
 	        
 	    }
 	    else if(x == 39){  //right arrow
-	    	if(serpent.speedx==-1){
+	    	if(serpent.speedx==-1 && total>0){
 	    		serpent.speedy=0;
 	    	}
 	    	else{
@@ -24,7 +24,7 @@ window.onload= function()
 	    	}
 	    }
 	    else if(x == 38){  //up arrow
-	    	if(serpent.speedy==1){
+	    	if(serpent.speedy==1 && total>0){
 	    		serpent.speedx=0;
 	    	}
 	    	else{
@@ -33,7 +33,7 @@ window.onload= function()
 	    	}
 	    }
 	    else if(x == 40){  //down arrow
-	    	if(serpent.speedy==-1){
+	    	if(serpent.speedy==-1 && total>0){
 	    		serpent.speedx=0;
 	    	}
 	    	else{
@@ -65,6 +65,7 @@ window.onload= function()
 	var bodyx = [];
 	var bodyy = [];
 	var total=0;
+	var scoreTotal=0;
 	function drawSnake(prevx,prevy){
 		if(total==0){
 			ctx.clearRect(prevx,prevy,serpent.scl,serpent.scl);
@@ -108,7 +109,7 @@ window.onload= function()
     	if(serpent.posx==pomme.posx && serpent.posy==pomme.posy){
     		
     		total++;
-    		document.getElementById("score").textContent = total;
+    		document.getElementById("pomme").textContent = "Nbr de pommes : "+total;
     		return true;
     	}
     	else{
@@ -140,7 +141,7 @@ window.onload= function()
 			else{
 				if(serpent.posx==tailx[tailx.length-1-i] && serpent.posy==taily[taily.length-1-i]){
 					console.log("yes it touches");
-					document.getElementById("score").textContent = "votre score est de : "+total;
+					document.getElementById("pomme").textContent = "Vous avez mangé "+total+" pommes";
 					a=true;
 				}
 				else{
@@ -154,14 +155,33 @@ window.onload= function()
 		return b ;
 
 	}
-	var myInterval = setInterval(animate, 1000/10);
+	var i=0;
+	var interval=20;
+	var myInterval = setInterval(animate, 1000/interval);
     function animate(){
 
+    	var int =i/interval
+    	var str= int+"";
+		var res = str.split(".");
+		console.log(res[0]+"."+i%interval);
+		if(res[0]>=60){
+			rest=(res[0]/60)+"";
+			reste=rest.split(".");
+			console.log(rest[0]/60);
+			document.getElementById("temps").textContent = "Time : "+reste[0]+"."+res[0]%60+"."+(i%interval)*3;
+		}
+		else{
+			document.getElementById("temps").textContent = "Time : "+res[0]+"."+(i%interval)*3;
+		}
 
+		scoreTotal=i*total;
+		document.getElementById("score").textContent = "Score : "+scoreTotal;
     	if(collideTail()){
     		console.log("testessea");
+    		
     	}
     	else{
+    		i++;
     		drawSnake(prevx,prevy);
 	    	if(collide()){
 	    		drawPomme();
