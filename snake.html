@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<script type="text/javascript" src="snake.js"></script>
+	<!--<script type="text/javascript" src="test.js"></script>-->
+	<style>
+		#myCanvas{
+			background-color: #424242;
+		}
+		#afficheur{
+			width : 1000px;
+			height : 60px;
+			background-color: #C2185B;
+		}
+		#score{
+			font-family: fantasy;
+			text-align: center;
+			font-weight: 100;
+			font-size: 2em;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+<div id="afficheur">
+	<p id="score">0</p>
+</div >
+<canvas  id="myCanvas" width="1000" height="500" onkeydown="directionnalFunction(event)"></canvas>
+</body>
+</html>
